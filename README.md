@@ -39,4 +39,17 @@ file = File.read! @rss_file
 feed_title = parsed[:feed][:title] # the feed title
 ```
 
+Passing extra arguments to feedparser:
+
+Use a keyword list as `Feederer.parse` second argument. Allowed arguments are:
+`etag`, `modified`, `agent`, `referrer`, `handlers`, `request_headers`,
+`response_headers`
+
+See [feedparser documentation](https://pythonhosted.org/feedparser/) for more
+information about these arguments.
+
+```elixir
+{:ok, parsed} = Feederer.parse(file, [{:etag, foo}, {:request_headers, bar}])
+```
+
 More usage examples: See [/test/feederer_test.exs](/test/feederer_test.exs)

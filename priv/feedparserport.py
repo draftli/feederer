@@ -66,10 +66,16 @@ def py2erl(term, root):
 
 
 def test(url_filepath_or_string, *args):
-    args = [arg if arg else None for arg in args]
+    allowed_kwargs = ['etag', 'modified', 'agent', 'referrer', 'handlers',
+                      'request_headers', 'response_headers']
+    args_dict = dict((str(kwarg), val) for kwarg, val in args[0])
+    feedparser_args = dict((kwarg, val)
+                           for (kwarg, val) in args_dict.iteritems()
+                           if kwarg in allowed_kwargs)
 
+    feed = []
     try:
-        feed = feedparser.parse(url_filepath_or_string, *args)
+        feed = feedparser.parse(url_filepath_or_string, **feedparser_args)
     except:
         return (Atom('error'), Atom('feedparser failed'))
     finally:

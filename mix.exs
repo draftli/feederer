@@ -22,8 +22,8 @@ defmodule Feederer.Mixfile do
   defp package do
     [contributors: ["Victor Felder"],
      licenses: ["MIT"],
-     description: "Elixir feedparser wrapper using erlport. Parses XML syndication
-feeds such as RSS, Atom, etc.",
+     description: "Elixir feedparser wrapper using erlport. Parses XML
+syndication feeds such as RSS, Atom, etc.",
      links: %{"GitHub" => "https://github.com/vhf/feederer",
               "feedparser" => "https://github.com/kurtmckee/feedparser"}]
   end
