@@ -17,7 +17,7 @@ Requirements: Python, *sh. (In other words, it should work on anything except
 Microsoft Windows. If you'd like to support Microsoft Windows it's certainly
 doable, [/priv/install.sh](/priv/install.sh) is a good starting point.)
 
-1. Add `{:erlport, git: "https://github.com/vhf/feederer.git", tag: "v0.1"}` to
+1. Add `{:erlport, git: "https://github.com/vhf/feederer.git", tag: "v0.2"}` to
 your `mix.exs` dependencies.
 2. Run `mix FeedparserInstall` to install the python dependencies.
 
