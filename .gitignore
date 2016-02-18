@@ -1,0 +1,7 @@
+*.ez
+/_build
+/deps
+/priv/*.pyc
+/priv/erlport
+/priv/feedparser.py
+erl_crash.dump
