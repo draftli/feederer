@@ -26,6 +26,6 @@ defmodule Feederer do
     {:ok, pp} = :python.start(start_args)
 
     poll_args = [url_filepath_or_string, opts]
-    :python.call(pp, :feedparserport, :test, poll_args)
+    :python.call(pp, :feedparserport, :parse, poll_args)
   end
 end

@@ -70,7 +70,7 @@ def py2erl(term, root):
     return term.encode('utf8')
 
 
-def test(url_filepath_or_string, *args):
+def parse(url_filepath_or_string, *args):
     allowed_kwargs = [
         'etag', 'modified', 'agent', 'referrer', 'handlers',
         'request_headers', 'response_headers',
