@@ -13,9 +13,10 @@ Last-Modified headers), a local file or a string.
 
 ## Installation
 
-Requirements: Python, *sh. (In other words, it should work on anything except
-Microsoft Windows. If you'd like to support Microsoft Windows it's certainly
-doable, [/priv/install.sh](/priv/install.sh) is a good starting point.)
+Requirements: Python 2.6+ or Python 3+, *sh. (In other words, it should work on
+anything except Microsoft Windows. If you'd like to support Microsoft Windows
+it's certainly doable, [/priv/install.sh](/priv/install.sh) is a good starting
+point.)
 
 1. Add `{:erlport, git: "https://github.com/vhf/feederer.git", tag: "v0.2"}` to
 your `mix.exs` dependencies.
@@ -43,13 +44,13 @@ Passing extra arguments to feedparser:
 
 Use a keyword list as `Feederer.parse` second argument. Allowed arguments are:
 `etag`, `modified`, `agent`, `referrer`, `handlers`, `request_headers`,
-`response_headers`
+`response_headers`.
 
 See [feedparser documentation](https://pythonhosted.org/feedparser/) for more
 information about these arguments.
 
 ```elixir
-{:ok, parsed} = Feederer.parse(file, [{:etag, foo}, {:request_headers, bar}])
+{:ok, parsed} = Feederer.parse(file, [etag: foo, request_headers: bar])
 ```
 
 More usage examples: See [/test/feederer_test.exs](/test/feederer_test.exs)

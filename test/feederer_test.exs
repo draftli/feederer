@@ -41,7 +41,7 @@ defmodule FeedererTest do
     assert parsed[:bozo] == nil
 
     etag = parsed[:etag]
-    {:ok, should304} = Feederer.parse(url, [{:etag, etag}])
+    {:ok, should304} = Feederer.parse(url, [etag: etag, hello: "lol"])
     assert should304[:status] == 304
     assert should304[:bozo] == nil
 
@@ -50,12 +50,11 @@ defmodule FeedererTest do
                       |> Enum.find(fn(x) -> elem(x, 0) == "last-modified" end)
                       |> elem(1)
 
-    {:ok, should304} = Feederer.parse(url, [{:modified, modified}])
+    {:ok, should304} = Feederer.parse(url, [modified: modified])
     assert should304[:status] == 304
     assert should304[:bozo] == nil
 
-    {:ok, should304} = Feederer.parse(url, [{:etag, etag},
-                                            {:modified, modified}])
+    {:ok, should304} = Feederer.parse(url, [etag: etag, modified: modified])
     assert should304[:status] == 304
     assert should304[:bozo] == nil
   end
