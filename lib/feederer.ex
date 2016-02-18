@@ -5,27 +5,41 @@ defmodule Feederer do
   with `mix FeedparserInstall`
   """
 
-  def start(_type, _args) do
-    import Supervisor.Spec, warn: false
+  alias Feederer.Worker, as: Worker
 
-    opts = [strategy: :one_for_one, name: Feederer.Supervisor]
-    Supervisor.start_link([], opts)
+  defp pool_name do
+    :feederer_pool
   end
 
-  @doc """
-  Parses a feed provided as a URL, a file path or a string.
-  `etag` and `modified` parameters are documented on this page:
-  https://pythonhosted.org/feedparser/http-etag.html
+  def start(_type, _args) do
+    poolboy_config = [
+      {:name, {:local, pool_name()}},
+      {:worker_module, Worker},
+      {:size, 2},
+      {:max_overflow, 1}
+    ]
 
-  Both etag and modified are optional. You can provide one, the other or both.
-  """
+    children = [
+      :poolboy.child_spec(pool_name(), poolboy_config, [])
+    ]
+
+    options = [
+      strategy: :one_for_one,
+      name: Feederer.Supervisor
+    ]
+
+    Supervisor.start_link(children, options)
+  end
+
   def parse(url_filepath_or_string, opts \\ []) do
-    start_args = [
-      {:python_path, to_char_list(Path.expand("priv"))},
-      {:python, 'python'}]
-    {:ok, pp} = :python.start(start_args)
+    dispatch_to_parser(url_filepath_or_string, opts)
+  end
 
-    poll_args = [url_filepath_or_string, opts]
-    :python.call(pp, :feedparserport, :parse, poll_args)
+  defp dispatch_to_parser(url_filepath_or_string, opts) do
+    :poolboy.transaction(
+      pool_name(),
+      fn(pid) -> Worker.do_parse(pid, url_filepath_or_string, opts) end,
+      5 * 1000 # 5 seconds timeout for a worker
+    )
   end
 end

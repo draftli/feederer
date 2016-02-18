@@ -3,19 +3,24 @@ defmodule Feederer.Mixfile do
 
   def project do
     [app: :feederer,
-     version: "0.3.0",
+     version: "0.4.0",
      elixir: "~> 1.0",
      deps: deps,
      package: package]
   end
 
   def application do
-    [applications: []]
+    [
+      mod: {Feederer, []},
+      applications: [:logger, :poolboy]
+    ]
   end
 
   defp deps do
-    [{:erlport, git: "https://github.com/hdima/erlport.git", tag: "v0.7"},
-     {:dogma, "~> 0.0", only: :dev},
+    [{:erlport, git: "https://github.com/hdima/erlport.git",
+      ref: "4041c0810f798cba9fa528ebca90556f0ae50645"},
+     {:poolboy, "~> 1.5"},
+     {:dogma, "~> 0.1", only: :dev},
      {:credo, "~> 0.3", only: [:dev, :test]}]
   end
 

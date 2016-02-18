@@ -20,7 +20,7 @@ point.)
 
 1. Add `{:erlport, git: "https://github.com/vhf/feederer.git", tag: "v0.3"}` to
 your `mix.exs` dependencies.
-2. Run `mix FeedparserInstall` to install the python dependencies.
+2. Run `mix FeedparserInstall` to install the python feedparser dependencies.
 
 ## Usage
 
