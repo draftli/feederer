@@ -35,13 +35,13 @@ defmodule FeedererTest do
     assert parsed[:bozo] == nil
   end
 
-  test "parsing rss url with headers" do
+  test "parsing rss url with etag, headers" do
     url = "http://www.rssboard.org/files/sample-rss-2.xml"
     {:ok, parsed} = Feederer.parse(url)
     assert parsed[:bozo] == nil
 
     etag = parsed[:etag]
-    {:ok, should304} = Feederer.parse(url, [etag: etag, hello: "lol"])
+    {:ok, should304} = Feederer.parse(url, etag: etag)
     assert should304[:status] == 304
     assert should304[:bozo] == nil
 
@@ -50,13 +50,20 @@ defmodule FeedererTest do
                       |> Enum.find(fn(x) -> elem(x, 0) == "last-modified" end)
                       |> elem(1)
 
-    {:ok, should304} = Feederer.parse(url, [modified: modified])
+    {:ok, should304} = Feederer.parse(url, modified: modified)
     assert should304[:status] == 304
     assert should304[:bozo] == nil
 
-    {:ok, should304} = Feederer.parse(url, [etag: etag, modified: modified])
+    {:ok, should304} = Feederer.parse(url, etag: etag, modified: modified)
     assert should304[:status] == 304
     assert should304[:bozo] == nil
+  end
+
+  test "parsing with unknown 2nd arguments" do
+    file = File.read! @sample_rss
+    {:ok, parsed} = Feederer.parse(file, slams: 17, medal: "gold")
+    assert parsed[:feed][:title] == "Liftoff News"
+    assert parsed[:bozo] == nil
   end
 
   test "feed not found" do
