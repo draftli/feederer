@@ -11,7 +11,7 @@ defmodule Feederer.Mixfile do
 
   def application do
     [
-      mod: {Feederer, []},
+      mod: {Feederer, []}, # pass poolboy config in here
       applications: [:logger, :poolboy]
     ]
   end

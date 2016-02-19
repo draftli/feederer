@@ -22,6 +22,11 @@ point.)
 your `mix.exs` dependencies.
 2. Run `mix FeedparserInstall` to install the python feedparser dependencies.
 
+## Configuration
+
+You can optionally configure the pool size in `mix.exs`, under `application`.
+See `poolboy_config` in `feederer.ex` to see what is configurable.
+
 ## Usage
 
 Parsing a distant feed:

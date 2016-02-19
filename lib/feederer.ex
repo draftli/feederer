@@ -11,12 +11,12 @@ defmodule Feederer do
     :feederer_pool
   end
 
-  def start(_type, _args) do
+  def start(_type, opts) do
     poolboy_config = [
       {:name, {:local, pool_name()}},
       {:worker_module, Worker},
-      {:size, 2},
-      {:max_overflow, 1}
+      {:size, Keyword.get(opts, :pool_size, 10)},
+      {:max_overflow, Keyword.get(opts, :max_overflow, 0)}
     ]
 
     children = [
