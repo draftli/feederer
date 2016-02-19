@@ -20,6 +20,7 @@ defmodule Feederer.Mixfile do
     [{:erlport, git: "https://github.com/hdima/erlport.git",
       ref: "4041c0810f798cba9fa528ebca90556f0ae50645"},
      {:poolboy, "~> 1.5"},
+     {:dialyxir, "~> 0.3", only: :dev},
      {:dogma, "~> 0.1", only: :dev},
      {:credo, "~> 0.3", only: [:dev, :test]}]
   end

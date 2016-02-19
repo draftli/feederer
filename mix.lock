@@ -1,5 +1,6 @@
 %{"bunt": {:hex, :bunt, "0.1.5"},
   "credo": {:hex, :credo, "0.3.3"},
+  "dialyxir": {:hex, :dialyxir, "0.3.3"},
   "dogma": {:hex, :dogma, "0.1.0"},
   "erlport": {:git, "https://github.com/hdima/erlport.git", "4041c0810f798cba9fa528ebca90556f0ae50645", [ref: "4041c0810f798cba9fa528ebca90556f0ae50645"]},
   "poison": {:hex, :poison, "1.5.2"},

@@ -10,6 +10,7 @@ defmodule Feederer.Parser do
 
   Both etag and modified are optional. You can provide one, the other or both.
   """
+  @spec parse(String.t, List | []) :: {:ok, String.t}
   def parse(url_filepath_or_string, opts \\ []) do
     start_args = [
       {:python_path, to_char_list(Path.expand("priv"))},
