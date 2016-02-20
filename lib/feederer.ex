@@ -2,7 +2,7 @@ defmodule Feederer do
   use Application
   @moduledoc """
   Uses erlport to parse an XML syndication feed. Install feedparser and erlport
-  with `mix FeedparserInstall`
+  with `mix feedparser.install`
   """
 
   alias Feederer.Worker, as: Worker

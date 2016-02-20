@@ -34,11 +34,3 @@ syndication feeds such as RSS, Atom, etc.",
               "feedparser" => "https://github.com/kurtmckee/feedparser"}]
   end
 end
-
-defmodule Mix.Tasks.FeedparserInstall do
-  use Mix.Task
-
-  def run(_args) do
-    System.cmd "sh", ["priv/install.sh"], [{:cd, System.cwd}]
-  end
-end
