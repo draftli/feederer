@@ -1,7 +1,7 @@
 #!/usr/local/bin/python
 # Parts of this file inspired by https://github.com/urbanserj/feedparser/
 # Copyright (C) 2011, 2012 by Sergey Urbanovich - MIT License
-# Copyright (C) 2016 by Draft authors - MIT License
+# Copyright (C) 2016 by Draft authors - LGPLv3: see ../LICENSE file
 import time
 import feedparser
 
