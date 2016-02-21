@@ -48,7 +48,7 @@ feed_title = parsed[:feed][:title] # the feed title
 Passing extra arguments to feedparser:
 
 Use a keyword list as `Feederer.parse` second argument. Allowed arguments are:
-`etag`, `modified`, `agent`, `referrer`, `handlers`, `request_headers`,
+`etag`, `modified`, `agent`, `referrer`, `request_headers`,
 `response_headers`.
 
 See [feedparser documentation](https://pythonhosted.org/feedparser/) for more

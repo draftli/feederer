@@ -72,7 +72,7 @@ def py2erl(term, root):
 
 def parse(url_filepath_or_string, *args):
     allowed_kwargs = [
-        'etag', 'modified', 'agent', 'referrer', 'handlers',
+        'etag', 'modified', 'agent', 'referrer',
         'request_headers', 'response_headers',
     ]
     args_dict = dict(
