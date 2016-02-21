@@ -71,14 +71,17 @@ def py2erl(term, root):
 
 
 def parse(url_filepath_or_string, *args):
+    # arguments accepted by feedparser
     allowed_kwargs = [
         'etag', 'modified', 'agent', 'referrer',
         'request_headers', 'response_headers',
     ]
+    # arguments we received from Elixir
     args_dict = dict(
         (str(kwarg), val)
         for kwarg, val in args[0]
     )
+    # only keep valid arguments
     feedparser_args = dict(
         (kwarg, val)
         for (kwarg, val) in args_dict.iteritems()
