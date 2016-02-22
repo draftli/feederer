@@ -14,13 +14,18 @@ Last-Modified headers), a local file or a string.
 ## Installation
 
 Requirements: Python 2.6+ or Python 3+, *sh. (In other words, it should work on
-anything except Microsoft Windows. If you'd like to support Microsoft Windows
-it's certainly doable, [/priv/install.sh](/priv/install.sh) is a good starting
-point.)
+anything except Microsoft Windows provided you have a somewhat up-to-date Python
+version installed. If you'd like to support Microsoft Windows it's certainly
+doable, [/priv/install.sh](/priv/install.sh) is a good starting point.)
 
-1. Add `{:erlport, git: "https://github.com/vhf/feederer.git", tag: "v0.3"}` to
-your `mix.exs` dependencies.
-2. Run `mix FeedparserInstall` to install the python dependencies.
+1. Add `{:feederer, git: "https://github.com/draftli/feederer.git", tag: "v0.4"}`
+to your `mix.exs` dependencies.
+2. Run `mix feedparser.install` to install the python feedparser dependencies.
+
+## Configuration
+
+You can optionally configure the pool size in `mix.exs`, under `application`.
+See `poolboy_config` in `feederer.ex` to see what is configurable.
 
 ## Usage
 
@@ -43,7 +48,7 @@ feed_title = parsed[:feed][:title] # the feed title
 Passing extra arguments to feedparser:
 
 Use a keyword list as `Feederer.parse` second argument. Allowed arguments are:
-`etag`, `modified`, `agent`, `referrer`, `handlers`, `request_headers`,
+`etag`, `modified`, `agent`, `referrer`, `request_headers`,
 `response_headers`.
 
 See [feedparser documentation](https://pythonhosted.org/feedparser/) for more

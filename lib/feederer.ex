@@ -2,30 +2,44 @@ defmodule Feederer do
   use Application
   @moduledoc """
   Uses erlport to parse an XML syndication feed. Install feedparser and erlport
-  with `mix FeedparserInstall`
+  with `mix feedparser.install`
   """
 
-  def start(_type, _args) do
-    import Supervisor.Spec, warn: false
+  alias Feederer.Worker
 
-    opts = [strategy: :one_for_one, name: Feederer.Supervisor]
-    Supervisor.start_link([], opts)
+  defp pool_name do
+    :feederer_pool
   end
 
-  @doc """
-  Parses a feed provided as a URL, a file path or a string.
-  `etag` and `modified` parameters are documented on this page:
-  https://pythonhosted.org/feedparser/http-etag.html
+  def start(_type, opts) do
+    poolboy_config = [
+      {:name, {:local, pool_name()}},
+      {:worker_module, Worker},
+      {:size, Keyword.get(opts, :pool_size, 10)},
+      {:max_overflow, Keyword.get(opts, :max_overflow, 0)}
+    ]
 
-  Both etag and modified are optional. You can provide one, the other or both.
-  """
-  def parse(url_filepath_or_string, opts \\ []) do
-    start_args = [
-      {:python_path, to_char_list(Path.expand("priv"))},
-      {:python, 'python'}]
-    {:ok, pp} = :python.start(start_args)
+    children = [
+      :poolboy.child_spec(pool_name(), poolboy_config, [])
+    ]
 
-    poll_args = [url_filepath_or_string, opts]
-    :python.call(pp, :feedparserport, :parse, poll_args)
+    options = [
+      strategy: :one_for_one,
+      name: Feederer.Supervisor
+    ]
+
+    Supervisor.start_link(children, options)
+  end
+
+  def parse(feed, opts \\ []) do
+    dispatch_to_parser(feed, opts)
+  end
+
+  defp dispatch_to_parser(feed, opts) do
+    :poolboy.transaction(
+      pool_name(),
+      fn(pid) -> Worker.do_parse(pid, feed, opts) end,
+      5 * 1000 # 5 seconds timeout for a worker
+    )
   end
 end

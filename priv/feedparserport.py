@@ -1,7 +1,7 @@
 #!/usr/local/bin/python
 # Parts of this file inspired by https://github.com/urbanserj/feedparser/
 # Copyright (C) 2011, 2012 by Sergey Urbanovich - MIT License
-# Copyright (C) 2016 by Draft authors - MIT License
+# Copyright (C) 2016 by Draft authors - LGPLv3: see ../LICENSE file
 import time
 import feedparser
 
@@ -70,15 +70,18 @@ def py2erl(term, root):
     return term.encode('utf8')
 
 
-def parse(url_filepath_or_string, *args):
+def parse(feed, *args):
+    # arguments accepted by feedparser
     allowed_kwargs = [
-        'etag', 'modified', 'agent', 'referrer', 'handlers',
+        'etag', 'modified', 'agent', 'referrer',
         'request_headers', 'response_headers',
     ]
+    # arguments we received from Elixir
     args_dict = dict(
         (str(kwarg), val)
         for kwarg, val in args[0]
     )
+    # only keep valid arguments
     feedparser_args = dict(
         (kwarg, val)
         for (kwarg, val) in args_dict.iteritems()
@@ -86,7 +89,7 @@ def parse(url_filepath_or_string, *args):
     )
 
     try:
-        feed = feedparser.parse(url_filepath_or_string, **feedparser_args)
+        feed = feedparser.parse(feed, **feedparser_args)
     except:
         return (Atom('error'), Atom('feedparser failed'))
     finally:
