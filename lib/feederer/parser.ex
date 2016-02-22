@@ -11,13 +11,13 @@ defmodule Feederer.Parser do
   Both etag and modified are optional. You can provide one, the other or both.
   """
   @spec parse(String.t, %{}) :: {:ok, String.t}
-  def parse(url_filepath_or_string, opts \\ %{}) do
+  def parse(feed, opts \\ %{}) do
     start_args = [
       {:python_path, to_char_list(Path.expand("priv"))},
       {:python, 'python'}]
     {:ok, pp} = :python.start(start_args)
 
-    poll_args = [url_filepath_or_string, opts]
+    poll_args = [feed, opts]
     :python.call(pp, :feedparserport, :parse, poll_args)
   end
 end

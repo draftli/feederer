@@ -3,7 +3,7 @@ defmodule Feederer.Worker do
   Poolboy worker, dispatching parsing work to separate processes.
   """
 
-  import Feederer.Parser
+  alias Feederer.Parser
   use GenServer
 
   def start_link([]) do
@@ -14,15 +14,13 @@ defmodule Feederer.Worker do
     {:ok, state}
   end
 
-  def handle_call(args, _from, state) do
-    url_filepath_or_string = args[:url_filepath_or_string]
-    opts = args[:opts]
-    {:ok, parsed} = parse(url_filepath_or_string, opts)
+  def handle_call(%{feed: feed, opts: opts}, _from, state) do
+    {:ok, parsed} = Parser.parse(feed, opts)
     {:reply, {:ok, parsed}, state}
   end
 
-  def do_parse(pid, url_filepath_or_string, opts) do
-    args = [url_filepath_or_string: url_filepath_or_string, opts: opts]
+  def do_parse(pid, feed, opts) do
+    args = %{feed: feed, opts: opts}
     :gen_server.call(pid, args)
   end
 end

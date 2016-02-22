@@ -70,7 +70,7 @@ def py2erl(term, root):
     return term.encode('utf8')
 
 
-def parse(url_filepath_or_string, *args):
+def parse(feed, *args):
     # arguments accepted by feedparser
     allowed_kwargs = [
         'etag', 'modified', 'agent', 'referrer',
@@ -89,7 +89,7 @@ def parse(url_filepath_or_string, *args):
     )
 
     try:
-        feed = feedparser.parse(url_filepath_or_string, **feedparser_args)
+        feed = feedparser.parse(feed, **feedparser_args)
     except:
         return (Atom('error'), Atom('feedparser failed'))
     finally:

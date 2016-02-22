@@ -5,7 +5,7 @@ defmodule Feederer do
   with `mix feedparser.install`
   """
 
-  alias Feederer.Worker, as: Worker
+  alias Feederer.Worker
 
   defp pool_name do
     :feederer_pool
@@ -31,14 +31,14 @@ defmodule Feederer do
     Supervisor.start_link(children, options)
   end
 
-  def parse(url_filepath_or_string, opts \\ []) do
-    dispatch_to_parser(url_filepath_or_string, opts)
+  def parse(feed, opts \\ []) do
+    dispatch_to_parser(feed, opts)
   end
 
-  defp dispatch_to_parser(url_filepath_or_string, opts) do
+  defp dispatch_to_parser(feed, opts) do
     :poolboy.transaction(
       pool_name(),
-      fn(pid) -> Worker.do_parse(pid, url_filepath_or_string, opts) end,
+      fn(pid) -> Worker.do_parse(pid, feed, opts) end,
       5 * 1000 # 5 seconds timeout for a worker
     )
   end
