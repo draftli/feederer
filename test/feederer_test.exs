@@ -47,8 +47,8 @@ defmodule FeedererTest do
 
 
     modified = parsed[:headers]
-                      |> Enum.find(fn(x) -> elem(x, 0) == "last-modified" end)
-                      |> elem(1)
+               |> Enum.find(fn(x) -> elem(x, 0) == "last-modified" end)
+               |> elem(1)
 
     {:ok, should304} = Feederer.parse(url, modified: modified)
     assert should304[:status] == 304
