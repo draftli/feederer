@@ -1,8 +1,7 @@
 defmodule Feederer do
   use Application
   @moduledoc """
-  Uses erlport to parse an XML syndication feed. Install feedparser and erlport
-  with `mix feedparser.install`
+  Uses erlport to parse an XML syndication feed.
   """
 
   alias Feederer.Worker
@@ -11,20 +10,17 @@ defmodule Feederer do
     :feederer_pool
   end
 
-  def start(_type, opts) do
-    poolboy_config = [
-      {:name, {:local, pool_name()}},
-      {:worker_module, Worker},
-      {:size, Keyword.get(opts, :pool_size, 10)},
-      {:max_overflow, Keyword.get(opts, :max_overflow, 0)}
-    ]
+  def start(_type, _opts) do
+    local_config = [name: {:local, pool_name()}, worker_module: Worker]
+    mix_config = Application.fetch_env!(:feederer, :poolboy)
+    poolboy_config = mix_config |> Keyword.merge(local_config)
 
     children = [
       :poolboy.child_spec(pool_name(), poolboy_config, [])
     ]
 
     options = [
-      strategy: :one_for_one,
+      strategy: Application.fetch_env!(:feederer, :supervisor_strategy),
       name: Feederer.Supervisor
     ]
 

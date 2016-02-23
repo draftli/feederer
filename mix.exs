@@ -3,7 +3,7 @@ defmodule Feederer.Mixfile do
 
   def project do
     [app: :feederer,
-     version: "0.4.0",
+     version: "0.5.0",
      elixir: "~> 1.0",
      deps: deps,
      package: package]
@@ -11,8 +11,8 @@ defmodule Feederer.Mixfile do
 
   def application do
     [
-      mod: {Feederer, []}, # pass poolboy config in here
-      applications: [:logger, :poolboy]
+      applications: [:logger, :poolboy],
+      mod: {Feederer, []},
     ]
   end
 
