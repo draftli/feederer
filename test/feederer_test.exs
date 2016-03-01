@@ -10,9 +10,10 @@ defmodule FeedererTest do
     assert parsed[:feed][:title] == "Some Awesome Blog"
     assert parsed[:bozo] == nil
 
-    sub_url = parsed[:feed][:links]
-              |> Enum.find(fn(x) -> x[:rel] == "hub" end)
-              |> Keyword.get(:href)
+    sub_url =
+      parsed[:feed][:links]
+      |> Enum.find(fn(x) -> x[:rel] == "hub" end)
+      |> Keyword.get(:href)
     assert sub_url == "https://example.com/?pushpress=hub"
   end
 
@@ -22,9 +23,10 @@ defmodule FeedererTest do
     assert parsed[:feed][:title] == "Liftoff News"
     assert parsed[:bozo] == nil
 
-    sub_url = parsed[:feed][:links]
-              |> Enum.find(fn(x) -> x[:rel] == "alternate" end)
-              |> Keyword.get(:href)
+    sub_url =
+      parsed[:feed][:links]
+      |> Enum.find(fn(x) -> x[:rel] == "alternate" end)
+      |> Keyword.get(:href)
     assert sub_url == "http://liftoff.msfc.nasa.gov/"
   end
 
@@ -46,9 +48,10 @@ defmodule FeedererTest do
     assert should304[:bozo] == nil
 
 
-    modified = parsed[:headers]
-                      |> Enum.find(fn(x) -> elem(x, 0) == "last-modified" end)
-                      |> elem(1)
+    modified =
+      parsed[:headers]
+      |> Enum.find(fn(x) -> elem(x, 0) == "last-modified" end)
+      |> elem(1)
 
     {:ok, should304} = Feederer.parse(url, modified: modified)
     assert should304[:status] == 304
