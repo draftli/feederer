@@ -3,7 +3,7 @@ defmodule Feederer.Mixfile do
 
   def project do
     [app: :feederer,
-     version: "0.5.1",
+     version: "0.5.2",
      elixir: "~> 1.0",
      deps: deps,
      package: package]
@@ -26,11 +26,10 @@ defmodule Feederer.Mixfile do
   end
 
   defp package do
-    [contributors: ["Victor Felder", "Martin Maillard", "Matthieu Maury"],
-     maintainers: ["Victor Felder <victorfelder@gmail.com>"],
+    [maintainers: ["Victor Felder", "Martin Maillard", "Matthieu Maury"],
      licenses: ["LGPLv3"],
-     description: "Parses XML syndication feeds such as RSS, Atom, etc. Elixir
-     feedparser wrapper using erlport.",
+     description: "Parses XML syndication feeds such as RSS, Atom, etc. Elixir \
+                   feedparser wrapper using erlport.",
      links: %{"GitHub" => "https://github.com/vhf/feederer"}]
   end
 end

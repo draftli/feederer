@@ -20,7 +20,7 @@ doable, [/priv/install.sh](/priv/install.sh) is a good starting point.)
 
 ### Production
 
-1. Add `{:feederer, git: "https://github.com/draftli/feederer.git", tag: "v0.5.1"}`
+1. Add `{:feederer, git: "https://github.com/draftli/feederer.git", tag: "v0.5.2"}`
 to your `mix.exs` dependencies.
 2. Add `:feederer` to your `applications` in `mix.exs`:
 `[applications: […, :feederer]]`
@@ -33,7 +33,7 @@ command.
 
 ### Development
 
-1. Add `{:feederer, git: "https://github.com/draftli/feederer.git", tag: "v0.5.1"}`
+1. Add `{:feederer, git: "https://github.com/draftli/feederer.git", tag: "v0.5.2"}`
 to your `mix.exs` dependencies.
 2. Add `:feederer` to your `applications` in `mix.exs`:
 `[applications: […, :feederer]]`
