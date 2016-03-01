@@ -1,11 +1,14 @@
 defmodule Feederer.Mixfile do
   use Mix.Project
 
+  @version "0.5.2"
+
   def project do
     [app: :feederer,
-     version: "0.5.3",
+     version: @version,
      elixir: "~> 1.0",
      deps: deps,
+     docs: [source_ref: "v#{@version}", main: "readme", extras: ["README.md"]],
      package: package]
   end
 
@@ -22,7 +25,9 @@ defmodule Feederer.Mixfile do
      {:poolboy, "~> 1.5"},
      {:dialyxir, "~> 0.3", only: :dev},
      {:dogma, "~> 0.1", only: :dev},
-     {:credo, "~> 0.3", only: [:dev, :test]}]
+     {:credo, "~> 0.3", only: [:dev, :test]},
+     {:ex_doc, "~> 0.11", only: [:dev]},
+     {:earmark, "~> 0.2", only: [:dev]}]
   end
 
   defp package do
