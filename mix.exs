@@ -8,7 +8,13 @@ defmodule Feederer.Mixfile do
      version: @version,
      elixir: "~> 1.0",
      deps: deps,
-     docs: [source_ref: "v#{@version}", main: "readme", extras: ["README.md"]],
+     source_url: "https://github.com/draftli/feederer",
+     homepage_url: "https://github.com/draftli/feederer",
+     docs: [
+       source_ref: "v#{@version}",
+       main: "readme",
+       extras: ["README.md"]
+     ],
      package: package]
   end
 
