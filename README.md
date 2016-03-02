@@ -1,7 +1,8 @@
 # Feederer
 
-[Feederer (docs)](https://hexdocs.pm/feederer/) can fetch more than 17 Major
-singles titles from your RSS / Atom feeds.
+Feederer ([github](https://github.com/draftli/feederer))
+([docs](https://hexdocs.pm/feederer/)) can fetch more than 17 Major singles
+titles from your RSS / Atom feeds.
 
 Feederer is an Elixir wrapper for
 [feedparser](https://github.com/kurtmckee/feedparser).
