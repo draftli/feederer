@@ -21,6 +21,18 @@ defmodule Feederer.Mixfile do
   def application do
     [
       applications: [:logger, :poolboy],
+      env: [
+        erlport: [
+          python_path: to_char_list(Path.expand("priv")),
+          compressed: 6,
+          python: 'python'
+        ],
+        poolboy: [
+          size: 10,
+          max_overflow: 0
+        ],
+        supervisor_strategy: :one_for_one,
+      ],
       mod: {Feederer, []},
     ]
   end
