@@ -22,7 +22,7 @@ doable, [/priv/install.sh](/priv/install.sh) is a good starting point.)
 
 ### Production
 
-1. Add `{:feederer, "~> 0.5.3"}` to your `mix.exs` dependencies.
+1. Add `{:feederer, "~> 0.5.4"}` to your `mix.exs` dependencies.
 2. Add `:feederer` to your `applications` in `mix.exs`:
 `[applications: […, :feederer]]`
 3. Install `erlport==0.6` and `feedparser==5.2.1` using `pip` or `easy_install`.
@@ -34,7 +34,7 @@ command.
 
 ### Development
 
-1. Add `{:feederer, "~> 0.5.3"}` to your `mix.exs` dependencies.
+1. Add `{:feederer, "~> 0.5.4"}` to your `mix.exs` dependencies.
 2. Add `:feederer` to your `applications` in `mix.exs`:
 `[applications: […, :feederer]]`
 3. Run `mix feedparser.install` to install the python feedparser dependencies.
