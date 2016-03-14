@@ -7,15 +7,17 @@ defmodule Mix.Tasks.Feedparser.Install do
   use Mix.Task
 
   def run(_args) do
-    path = System.cwd <> "/priv/"
+    cwd = System.cwd
+    local = cwd <> "/priv/"
+    deps = cwd <> "/deps/feederer/priv/"
     file = "install.sh"
     cond do
-      File.exists?(path <> file) ->
-        System.cmd "sh", [file], [{:cd, path}]
-      File.exists?(path <> "/deps/" <> file) ->
-        System.cmd "sh", [file], [{:cd, path <> "/deps/"}]
+      File.exists?(local <> file) ->
+        System.cmd "sh", [file], [{:cd, local}]
+      File.exists?(deps <> file) ->
+        System.cmd "sh", [file], [{:cd, deps}]
       true ->
-        Mix.raise "Could not find install script in #{path} and #{path}/deps/."
+        Mix.raise "Could not find install script in #{deps} and #{local}."
     end
   end
 end
