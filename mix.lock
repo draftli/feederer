@@ -3,7 +3,7 @@
   "dialyxir": {:hex, :dialyxir, "0.3.3"},
   "dogma": {:hex, :dogma, "0.1.2"},
   "earmark": {:hex, :earmark, "0.2.1"},
-  "erlport": {:git, "https://github.com/hdima/erlport.git", "4041c0810f798cba9fa528ebca90556f0ae50645", [ref: "4041c0810f798cba9fa528ebca90556f0ae50645"]},
+  "erlport": {:git, "https://github.com/hdima/erlport.git", "4041c0810f798cba9fa528ebca90556f0ae50645", [ref: "246b7722d62b87b48be66d9a871509a537728962"]},
   "ex_doc": {:hex, :ex_doc, "0.11.4"},
   "poison": {:hex, :poison, "1.5.2"},
   "poolboy": {:hex, :poolboy, "1.5.1"}}

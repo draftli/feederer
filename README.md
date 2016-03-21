@@ -20,9 +20,17 @@ anything except Microsoft Windows provided you have a somewhat up-to-date Python
 version installed. If you'd like to support Microsoft Windows it's certainly
 doable, [/priv/install.sh](/priv/install.sh) is a good starting point.)
 
+*Important notice:* This package depends on an unpackaged version of erlport,
+therefore [`mix` will not install it automatically](https://github.com/hexpm/hex/blob/6c5a8c1cadc77a2a0ea2e8c4d5ce8a24a5c2aa3e/lib/mix/tasks/hex/publish.ex#L48-L51).
+It means you will have to manually add the following to your own `mix.exs`:
+
+```elixir
+{:erlport, git: "https://github.com/hdima/erlport.git", ref: "246b7722d62b87b48be66d9a871509a537728962"}
+```
+
 ### Production
 
-1. Add `{:feederer, "~> 0.5.5"}` to your `mix.exs` dependencies.
+1. Add `{:feederer, "~> 0.5.6"}` to your `mix.exs` dependencies.
 2. Add `:feederer` to your `applications` in `mix.exs`:
 `[applications: […, :feederer]]`
 3. Install `erlport==0.6` and `feedparser==5.2.1` using `pip` or `easy_install`.
@@ -34,7 +42,7 @@ command.
 
 ### Development
 
-1. Add `{:feederer, "~> 0.5.5"}` to your `mix.exs` dependencies.
+1. Add `{:feederer, "~> 0.5.6"}` to your `mix.exs` dependencies.
 2. Add `:feederer` to your `applications` in `mix.exs`:
 `[applications: […, :feederer]]`
 3. Run `mix feedparser.install` to install the python feedparser dependencies.

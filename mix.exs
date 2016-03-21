@@ -1,7 +1,7 @@
 defmodule Feederer.Mixfile do
   use Mix.Project
 
-  @version "0.5.5"
+  @version "0.5.6"
 
   def project do
     [app: :feederer,
@@ -39,7 +39,7 @@ defmodule Feederer.Mixfile do
 
   defp deps do
     [{:erlport, git: "https://github.com/hdima/erlport.git",
-      ref: "4041c0810f798cba9fa528ebca90556f0ae50645"},
+      ref: "246b7722d62b87b48be66d9a871509a537728962"},
      {:poolboy, "~> 1.5"},
      {:dialyxir, "~> 0.3", only: :dev},
      {:dogma, "~> 0.1", only: :dev},
