@@ -18,7 +18,7 @@ defmodule Mix.Tasks.Feedparser.Install do
       File.exists?(deps <> file) ->
         System.cmd "sh", [file], [{:cd, deps}]
       File.exists?(parent_deps <> file) ->
-        System.cmd "sh", [file], [{:cd, deps}]
+        System.cmd "sh", [file], [{:cd, parent_deps}]
       true ->
         Mix.raise "Could not find install script in. Looked in #{local}, #{deps}, #{parent_deps}."
     end
